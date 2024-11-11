@@ -22,21 +22,14 @@ async def start (update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text("Help!")
+    await update.message.reply_text("Hi, I am a Ollama chatbot running locally on a single machine. What can I do you for?")
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     response = ollama.chat(
         model='llama3',
         messages=[{'role': 'user', 'content': update.message.text}],
-        #stream=True,
     )
-
-#    for chunk in stream:
-#      await update.message.reply_text(chunk['message']['content'])
-    
     await update.message.reply_text(response['message']['content'])
-
-#    await update.message.reply_text(update.message.text)
 
 def main() -> None:
     """Start the bot."""
